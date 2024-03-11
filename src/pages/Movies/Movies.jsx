@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { moviesAPI } from 'helpers/moviesAPI';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-export const Movies = ({ title = 'Movies' }) => {
+const Movies = ({ title = 'Movies' }) => {
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
@@ -50,3 +50,5 @@ export const Movies = ({ title = 'Movies' }) => {
     </div>
   );
 };
+
+export default Movies;

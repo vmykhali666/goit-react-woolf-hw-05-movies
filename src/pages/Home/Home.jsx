@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { moviesAPI } from 'helpers/moviesAPI';
 import { Link, useLocation } from 'react-router-dom';
 
-export const Home = ({ title = "Trending today"}) => {
+const Home = ({ title = "Trending today"}) => {
     const [trendingMovies, setTrendingMovies] = useState([]);
     const location = useLocation();
 
@@ -23,3 +23,5 @@ export const Home = ({ title = "Trending today"}) => {
         </div>
     );
 };
+
+export default Home;
