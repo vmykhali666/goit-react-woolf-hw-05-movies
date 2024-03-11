@@ -8,6 +8,7 @@ export class moviesAPI {
 
         try {
             const response = await axios.get(url);
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error('Error:', error);
@@ -20,7 +21,6 @@ export class moviesAPI {
 
         try {
             const response = await axios.get(url);
-            console.log(response.data.results);
             return response.data.results;
         } catch (error) {
             console.error('Error:', error);
@@ -57,7 +57,7 @@ export class moviesAPI {
 
         try {
             const response = await axios.get(url);
-            return response.data;
+            return response.data.cast;
         } catch (error) {
             console.error('Error:', error);
             throw error;
@@ -69,7 +69,7 @@ export class moviesAPI {
 
         try {
             const response = await axios.get(url);
-            return response.data;
+            return response.data.results;
         } catch (error) {
             console.error('Error:', error);
             throw error;

@@ -1,0 +1,7 @@
+.AddInfo {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+}
