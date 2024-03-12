@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { moviesAPI } from 'helpers/moviesAPI';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import css from 'style/MovieDetails.module.css';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
+  const { location } = useLocation();
 
   useEffect(() => {
     if (!movieId) {
@@ -17,6 +18,7 @@ const MovieDetails = () => {
 
   return (
     <div className="movie-details">
+      <Link to={location?.state?.from ?? '/movies'}>Back</Link>
       <h2>{movie.title ?? movie.name}</h2>
       <p>Release Date: {movie.release_date}</p>
       <p>Original Language: {movie.original_language}</p>
@@ -25,7 +27,11 @@ const MovieDetails = () => {
       <p>Vote Average: {movie.vote_average}</p>
       <p>Vote Count: {movie.vote_count}</p>
       <img
-        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+        src={
+          movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+            : 'images/default-image.jpg'
+        }
         alt={movie.title ?? movie.name}
       />
       <div>
