@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-const SearchForm = ({ onSubmit }) => {
+const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    onSubmit(searchQuery);
+    setSearchParams({ search: searchQuery });
   };
+
+  useEffect(() => {
+    const query = searchParams.get('search');
+    query && setSearchQuery(query);
+  }
+  , [searchParams]);
+
 
   return (
     <form onSubmit={handleSearchSubmit}>

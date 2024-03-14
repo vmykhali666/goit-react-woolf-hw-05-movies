@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { moviesAPI } from 'helpers/moviesAPI';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import css from 'style/MovieDetails.module.css';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
-  const { location } = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!movieId) {
@@ -16,9 +17,14 @@ const MovieDetails = () => {
     moviesAPI.getMovieDetails(movieId).then(setMovie);
   }, [movieId]);
 
+  const handleBack = (e) => {
+    e.preventDefault();
+    navigate(location.state?.from ?? '/movies');
+  }
+
   return (
     <div className="movie-details">
-      <Link to={location?.state?.from ?? '/movies'}>Back</Link>
+      <button onClick={handleBack}>Back</button>
       <h2>{movie.title ?? movie.name}</h2>
       <p>Release Date: {movie.release_date}</p>
       <p>Original Language: {movie.original_language}</p>
@@ -44,8 +50,8 @@ const MovieDetails = () => {
             <Link to={`reviews`}>Reviews</Link>
           </li>
         </ul>
-        <Outlet />
       </div>
+      <Outlet />
     </div>
   );
 };

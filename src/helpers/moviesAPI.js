@@ -8,7 +8,6 @@ export class moviesAPI {
 
         try {
             const response = await axios.get(url);
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error('Error:', error);
